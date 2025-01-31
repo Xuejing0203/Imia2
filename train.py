@@ -12,7 +12,6 @@ import os
 import argparse
 
 from models import *
-# from models.resnet1 import ResNet50
 from utils import progress_bar
 
 
@@ -44,39 +43,25 @@ transform_test = transforms.Compose([
     # transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
 ])
 
-# 加载训练集
+
 train_dataset = torchvision.datasets.STL10(
-    root='./data',  # 数据集保存的路径
-    split='train',  # 加载训练集
-    download=True,  # 如果数据集不存在则下载
-    transform=transform_train  # 数据预处理操作
+    root='./data',  
+    split='train',  
+    download=True, 
+    transform=transform_train 
 )
 
 trainloader = torch.utils.data.DataLoader(train_dataset, batch_size=128, shuffle=True, num_workers=4)
 
 # 加载测试集
 test_dataset = torchvision.datasets.STL10(
-    root='./data',  # 数据集保存的路径
-    split='test',  # 加载测试集
-    download=True,  # 如果数据集不存在则下载
-    transform=transform_test  # 数据预处理操作
+    root='./data', 
+    split='test', 
+    download=True, 
+    transform=transform_test  
 )
 
 testloader = torch.utils.data.DataLoader(test_dataset, batch_size=100, shuffle=False, num_workers=4)
-
-# 打印加载的训练集和测试集大小
-print(f'Training set size: {len(train_dataset)}')
-print(f'Test set size: {len(test_dataset)}')
-# # 数据集路径
-# data_dir = "./data/tiny-imagenet-200/tiny-imagenet-200"
-
-# # 加载训练集
-# train_dataset = torchvision.datasets.ImageFolder(os.path.join(data_dir, "train"), transform=transform_train)
-# trainloader = torch.utils.data.DataLoader(train_dataset, batch_size=64, shuffle=True, num_workers=4)
-
-# # 加载测试集
-# test_dataset = torchvision.datasets.ImageFolder(os.path.join(data_dir, "val"), transform=transform_test)
-# testloader = torch.utils.data.DataLoader(test_dataset, batch_size=64, shuffle=False, num_workers=4)
 
 
 # Model
@@ -95,7 +80,6 @@ net = ResNeXt29_2x64d()
 # net = ShuffleNetV2(1)
 # net = EfficientNetB0()
 # net = RegNetX_200MF()
-# net = SimpleDLA()
 net = net.to(device)
 if device == 'cuda':
     net = torch.nn.DataParallel(net)
