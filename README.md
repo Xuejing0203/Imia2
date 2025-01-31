@@ -6,4 +6,4 @@ python main.py
 And conduct MIA through:
 python collect.py
 measuring the performance of our IMIA through:
-python Metric_evaluate.py
+python Metrics_evaluate.py
